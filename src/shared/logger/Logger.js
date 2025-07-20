@@ -12,7 +12,7 @@ class LoggerClass {
         options: {
           colorize: true,
           translateTime: 'SYS:standard',
-          ignore: 'pid,hostname',
+          ignore: 'hostname',
         },
       },
     });
