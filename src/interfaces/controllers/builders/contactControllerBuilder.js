@@ -1,8 +1,7 @@
 class ContactControllerBuilder {
     constructor() {
         this.service = null;
-        this.logger = console;
-
+        this.ControllerClass = null;
     }
 
     withService(service) {
@@ -10,16 +9,18 @@ class ContactControllerBuilder {
         return this;
     }
 
-    withLogger(logger) {
-        this.logger = logger;
+    withController(ControllerClass) {
+        this.ControllerClass = ControllerClass;
         return this;
     }
 
     build() {
-        if (!this.service) throw new Error("Servicio es requerido para el controllerbuilder");
-        return new ContactControllerBuilder(this.service, this.logger)
-    }
+        if (!this.service || !this.ControllerClass) {
+            throw new Error("Faltan dependencias");
+        }
 
+        return new this.ControllerClass(this.service);
+    }
 }
 
 export default ContactControllerBuilder;
